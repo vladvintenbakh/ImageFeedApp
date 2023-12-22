@@ -20,4 +20,8 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         imageView.image = image
     }
+    
+    @IBAction func didPressBackButton() {
+        dismiss(animated: true, completion: nil)
+    }
 }
