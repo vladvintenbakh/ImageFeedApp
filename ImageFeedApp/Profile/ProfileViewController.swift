@@ -81,6 +81,7 @@ class ProfileViewController: UIViewController {
         
         label.text = "Hello, world!"
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         label.textColor = UIColor(named: "YPWhite")
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         view.addSubview(label)
