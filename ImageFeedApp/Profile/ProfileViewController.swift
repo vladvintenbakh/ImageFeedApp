@@ -31,6 +31,8 @@ class ProfileViewController: UIViewController {
         
         imageView.image = UIImage(named: "Profile Picture")
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
+        imageView.clipsToBounds = true
         view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
