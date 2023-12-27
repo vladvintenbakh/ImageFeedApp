@@ -15,13 +15,6 @@ class ProfileViewController: UIViewController {
     private var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
     
-//    @IBOutlet private var profileImageView: UIImageView!
-//    @IBOutlet private var nameLabel: UILabel!
-//    @IBOutlet weak var handleLabel: UILabel!
-//    @IBOutlet weak var statusLabel: UILabel!
-//
-//    @IBOutlet weak var logoutButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,10 +24,6 @@ class ProfileViewController: UIViewController {
         setUpDescriptionLabel()
         setUpLogoutButton()
     }
-    
-//    @IBAction func didTapLogoutButton() {
-//
-//    }
     
     private func setUpProfileImage() {
         let imageView = UIImageView()
