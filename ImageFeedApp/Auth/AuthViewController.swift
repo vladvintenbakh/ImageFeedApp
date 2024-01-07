@@ -10,6 +10,8 @@ import UIKit
 final class AuthViewController: UIViewController {
     private let showWebViewSegueIdentifier = "ShowWebView"
     
+    private let sharedAuthService = OAuth2Service.shared
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showWebViewSegueIdentifier {
             guard
@@ -25,6 +27,15 @@ final class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         // TODO: process code
+        print("fetchAuthToken about to be called")
+        sharedAuthService.fetchAuthToken(code) { result in
+            switch result {
+            case .success(let bearerToken):
+                print("Successfully obtained and saved the token: \(bearerToken)")
+            case .failure(let error):
+                print("Failed to obtain the token with the following error: \(error)")
+            }
+        }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

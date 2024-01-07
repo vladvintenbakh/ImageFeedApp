@@ -268,23 +268,21 @@
                                     <action selector="didTapBackButton" destination="foS-9H-ltu" eventType="touchUpInside" id="DWs-am-3Y9"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-08-T7k">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-08-T7k">
                                 <rect key="frame" x="0.0" y="33" width="393" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="progressTintColor" name="YPBlack"/>
                             </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DbK-bY-5Lk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Tuo-08-T7k" secondAttribute="trailing" id="3L9-rV-z6K"/>
-                            <constraint firstItem="QtM-aj-JeI" firstAttribute="leading" secondItem="DbK-bY-5Lk" secondAttribute="leading" constant="9" id="4UV-0f-dsS"/>
-                            <constraint firstItem="Tuo-08-T7k" firstAttribute="leading" secondItem="09q-Mj-NtC" secondAttribute="leading" id="Ab1-WX-V4G"/>
-                            <constraint firstItem="sHo-b9-WtW" firstAttribute="leading" secondItem="09q-Mj-NtC" secondAttribute="leading" id="Fa2-g4-D4I"/>
-                            <constraint firstAttribute="trailing" secondItem="sHo-b9-WtW" secondAttribute="trailing" id="OCP-uu-Xbb"/>
-                            <constraint firstItem="Tuo-08-T7k" firstAttribute="top" secondItem="QtM-aj-JeI" secondAttribute="bottom" id="dcL-gU-fje"/>
-                            <constraint firstItem="QtM-aj-JeI" firstAttribute="top" secondItem="DbK-bY-5Lk" secondAttribute="top" constant="9" id="ffb-uk-98C"/>
+                            <constraint firstItem="sHo-b9-WtW" firstAttribute="leading" secondItem="DbK-bY-5Lk" secondAttribute="leading" id="Fa2-g4-D4I"/>
+                            <constraint firstItem="DbK-bY-5Lk" firstAttribute="trailing" secondItem="sHo-b9-WtW" secondAttribute="trailing" id="OCP-uu-Xbb"/>
+                            <constraint firstItem="QtM-aj-JeI" firstAttribute="top" secondItem="DbK-bY-5Lk" secondAttribute="top" constant="9" id="k4g-gF-IUd"/>
                             <constraint firstAttribute="bottom" secondItem="sHo-b9-WtW" secondAttribute="bottom" id="kpU-gh-O4l"/>
-                            <constraint firstItem="sHo-b9-WtW" firstAttribute="top" secondItem="09q-Mj-NtC" secondAttribute="top" id="tfF-HZ-4Ee"/>
+                            <constraint firstItem="QtM-aj-JeI" firstAttribute="leading" secondItem="DbK-bY-5Lk" secondAttribute="leading" constant="9" id="t3Z-p1-ap8"/>
+                            <constraint firstItem="sHo-b9-WtW" firstAttribute="top" secondItem="DbK-bY-5Lk" secondAttribute="top" id="tfF-HZ-4Ee"/>
                         </constraints>
                     </view>
                     <connections>
