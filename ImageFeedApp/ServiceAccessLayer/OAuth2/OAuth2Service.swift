@@ -30,7 +30,6 @@ final class OAuth2Service {
             switch result {
             case .success(let body):
                 let authToken = body.accessToken
-                print("Auth Token has been obtained: \(authToken)")
                 self.authToken = authToken
                 completion(.success(authToken))
             case .failure(let error):

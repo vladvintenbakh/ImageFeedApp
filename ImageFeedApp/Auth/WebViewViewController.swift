@@ -26,9 +26,6 @@ final class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let library = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
-        print(library.path)
-        
         webView.navigationDelegate = self
         
         var urlComponents = URLComponents(string: unsplashAuthorizeURLString)!
