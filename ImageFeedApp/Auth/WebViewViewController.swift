@@ -17,11 +17,11 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 final class WebViewViewController: UIViewController {
     
+    weak var delegate: WebViewViewControllerDelegate?
+    
     @IBOutlet private var webView: WKWebView!
     
     @IBOutlet private var progressView: UIProgressView!
-    
-    weak var delegate: WebViewViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +59,6 @@ final class WebViewViewController: UIViewController {
                                context: nil)
     }
     
-    @IBAction private func didTapBackButton() {
-        delegate?.webViewViewControllerDidCancel(self)
-    }
-    
     override func observeValue(forKeyPath keyPath: String?,
                                of object: Any?,
                                change: [NSKeyValueChangeKey : Any]?,
@@ -77,6 +73,10 @@ final class WebViewViewController: UIViewController {
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    }
+    
+    @IBAction private func didTapBackButton() {
+        delegate?.webViewViewControllerDidCancel(self)
     }
 }
 
