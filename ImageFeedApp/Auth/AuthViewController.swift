@@ -32,19 +32,7 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        
         delegate?.authViewController(self, didAuthenticateWithCode: code)
-        
-        // TODO: move this to the splash screen file
-//        print("fetchAuthToken about to be called")
-//        sharedAuthService.fetchAuthToken(code) { result in
-//            switch result {
-//            case .success(let bearerToken):
-//                print("Successfully obtained and saved the token: \(bearerToken)")
-//            case .failure(let error):
-//                print("Failed to obtain the token with the following error: \(error)")
-//            }
-//        }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
