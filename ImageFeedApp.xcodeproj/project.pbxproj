@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350810D92B57FEB800074D56 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350810D82B57FEB800074D56 /* UIBlockingProgressHUD.swift */; };
 		354B10672B450DD400D1CE57 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354B10662B450DD400D1CE57 /* OAuth2TokenStorage.swift */; };
 		355718E22B4BEFDE006CD850 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355718E12B4BEFDE006CD850 /* SplashViewController.swift */; };
 		3558B5952B198B7E00C9A0CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3558B5942B198B7E00C9A0CA /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		350810D82B57FEB800074D56 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		354B10662B450DD400D1CE57 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		355718E12B4BEFDE006CD850 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		3558B5912B198B7E00C9A0CA /* ImageFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 				358C4DA32B35A9AC00262E90 /* SingleImageView */,
 				35D937E82B3F088C0096AAC2 /* Constants.swift */,
 				35D937EC2B401F2B0096AAC2 /* Auth */,
+				350810D82B57FEB800074D56 /* UIBlockingProgressHUD.swift */,
 			);
 			path = ImageFeedApp;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				355718E22B4BEFDE006CD850 /* SplashViewController.swift in Sources */,
 				35D937EB2B401EFF0096AAC2 /* AuthViewController.swift in Sources */,
 				35D937E92B3F088C0096AAC2 /* Constants.swift in Sources */,
+				350810D92B57FEB800074D56 /* UIBlockingProgressHUD.swift in Sources */,
 				358C4DA22B35A51D00262E90 /* SingleImageViewController.swift in Sources */,
 				35677C902B42C80900BAEB57 /* URLSession+data.swift in Sources */,
 				35677C8B2B42A49E00BAEB57 /* OAuth2Service.swift in Sources */,
