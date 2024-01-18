@@ -10,6 +10,7 @@ import UIKit
 final class ProfileService {
     
     private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
     
     struct Profile {
         let username: String
@@ -19,7 +20,8 @@ final class ProfileService {
     }
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
-        // TODO: prevent possible race condition
+        assert(Thread.isMainThread)
+        task?.cancel()
         print("ProfileService.fetchProfile started executing")
         var request = URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -33,11 +35,14 @@ final class ProfileService {
                                       loginName: "@\(profileResult.username)",
                                       bio: profileResult.bio)
                 completion(.success(profile))
+                self.task = nil
             case .failure(let error):
                 print("Failed profile retrieval with error: \(error)")
                 completion(.failure(error))
+                self.task = nil
             }
         }
+        self.task = task
         task.resume()
     }
 }
