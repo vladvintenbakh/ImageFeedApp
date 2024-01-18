@@ -19,8 +19,16 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if let bearerToken = oAuth2TokenStorage.token {
-            fetchProfile(bearerToken)
-            switchToTabBarController()
+            profileService.fetchProfile(bearerToken) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let profile):
+                    print("Successfully retrieved the profile outside of authorization process: \(profile.name)")
+                    switchToTabBarController()
+                case .failure:
+                    break
+                }
+            }
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
@@ -77,7 +85,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
-                print("Successfully called the fetch profile function")
+                print("Successfully called the fetch profile function during authorization")
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
             case .failure:
