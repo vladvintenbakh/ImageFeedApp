@@ -14,6 +14,8 @@ final class ProfileService {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     
+    private(set) var profile: Profile?
+    
     struct Profile {
         let username: String
         let name: String
@@ -24,10 +26,8 @@ final class ProfileService {
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
         task?.cancel()
-        print("ProfileService.fetchProfile started executing")
         var request = URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        print("Request ready")
         let task = object(for: request) { result in
             switch result {
             case .success(let profileResult):
@@ -36,6 +36,7 @@ final class ProfileService {
                                       name: "\(profileResult.firstName) \(profileResult.lastName)",
                                       loginName: "@\(profileResult.username)",
                                       bio: profileResult.bio)
+                self.profile = profile
                 completion(.success(profile))
                 self.task = nil
             case .failure(let error):

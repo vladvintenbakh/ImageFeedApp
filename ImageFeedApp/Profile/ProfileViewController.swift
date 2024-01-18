@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController {
         setUpDescriptionLabel()
         setUpLogoutButton()
         
+        updateProfileDetails()
+        
 //        print("UI set up")
 //        
 //        guard let bearerToken = oAuth2TokenStorage.token else { return }
@@ -139,6 +141,14 @@ class ProfileViewController: UIViewController {
             button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55),
             button.leadingAnchor.constraint(greaterThanOrEqualTo: profileImageView.trailingAnchor),
         ])
+    }
+    
+    private func updateProfileDetails() {
+        print("Updating the profile details")
+        guard let profile = profileService.profile else { return }
+        self.nameLabel.text = profile.name
+        self.handleLabel.text = profile.loginName
+        self.descriptionLabel.text = profile.bio
     }
     
     @objc

@@ -16,7 +16,7 @@ final class OAuth2Service {
     private var task: URLSessionTask?
     private var lastCode: String?
     
-    private (set) var authToken: String? {
+    private(set) var authToken: String? {
         get {
             return OAuth2TokenStorage().token
         }
