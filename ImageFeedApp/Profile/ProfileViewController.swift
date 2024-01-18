@@ -15,14 +15,44 @@ class ProfileViewController: UIViewController {
     private var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
     
+    private let profileService = ProfileService()
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("View loaded")
         
         setUpProfileImage()
         setUpNameLabel()
         setUpHandleLabel()
         setUpDescriptionLabel()
         setUpLogoutButton()
+        
+        print("UI set up")
+        
+        guard let bearerToken = oAuth2TokenStorage.token else { return }
+        
+        print("Bearer token retrieved")
+        print("Bearer token value: \(bearerToken)")
+        
+        profileService.fetchProfile(bearerToken) { [weak self] result in
+            print("fetchProfile started executing")
+            guard let self = self else { return }
+            print("self unwrapped")
+            switch result {
+            case .success(let profile):
+                print("Successfully retrieved the profile")
+                self.nameLabel.text = profile.name
+                self.handleLabel.text = profile.loginName
+                self.descriptionLabel.text = profile.bio
+            case .failure(let error):
+                print("Failed with an error")
+                print(error)
+                break
+                // TODO: process the error
+            }
+        }
     }
     
     private func setUpProfileImage() {
