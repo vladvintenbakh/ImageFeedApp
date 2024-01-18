@@ -13,11 +13,13 @@ final class SplashViewController: UIViewController {
     
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
+    private let profileService = ProfileService()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let _ = oAuth2TokenStorage.token {
+        if let bearerToken = oAuth2TokenStorage.token {
+            fetchProfile(bearerToken)
             switchToTabBarController()
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
@@ -59,12 +61,28 @@ extension SplashViewController: AuthViewControllerDelegate {
         oAuth2Service.fetchAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success:
-                self.switchToTabBarController()
+            case .success(let token):
+                self.fetchProfile(token)
+            case .failure(let error):
                 UIBlockingProgressHUD.dismiss()
+                print(error)
+                break
+                // TODO: Process the error
+            }
+        }
+    }
+    
+    private func fetchProfile(_ token: String) {
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                print("Successfully called the fetch profile function")
+                UIBlockingProgressHUD.dismiss()
+                self.switchToTabBarController()
             case .failure:
                 UIBlockingProgressHUD.dismiss()
-                // TODO: Process the error
+                break
             }
         }
     }
