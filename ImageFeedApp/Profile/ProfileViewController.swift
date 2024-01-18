@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     private var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
     
-    private let profileService = ProfileService()
+    private let profileService = ProfileService.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
     override func viewDidLoad() {
