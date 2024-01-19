@@ -23,7 +23,6 @@ final class SplashViewController: UIViewController {
                 guard let self = self else { return }
                 switch result {
                 case .success(let profile):
-                    print("Successfully retrieved the profile outside of authorization process: \(profile.name)")
                     switchToTabBarController()
                 case .failure:
                     break
@@ -85,7 +84,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
-                print("Successfully called the fetch profile function during authorization")
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
             case .failure:

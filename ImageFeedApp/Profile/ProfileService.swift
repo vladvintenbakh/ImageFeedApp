@@ -31,7 +31,6 @@ final class ProfileService {
         let task = object(for: request) { result in
             switch result {
             case .success(let profileResult):
-                print("Successfully retrieved profile result for name: \(profileResult.firstName)")
                 let profile = Profile(username: profileResult.username,
                                       name: "\(profileResult.firstName) \(profileResult.lastName)",
                                       loginName: "@\(profileResult.username)",
@@ -40,7 +39,6 @@ final class ProfileService {
                 completion(.success(profile))
                 self.task = nil
             case .failure(let error):
-                print("Failed profile retrieval with error: \(error)")
                 completion(.failure(error))
                 self.task = nil
             }
