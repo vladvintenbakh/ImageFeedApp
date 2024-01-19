@@ -14,8 +14,11 @@ final class ProfileImageService {
     private(set) var avatarURL: String?
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
     
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        task?.cancel()
         var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET")
         guard let bearerToken = oAuth2TokenStorage.token else { return }
         request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
@@ -25,10 +28,13 @@ final class ProfileImageService {
                 let avatarURL = userResult.profileImage.small
                 self.avatarURL = avatarURL
                 completion(.success(avatarURL))
+                self.task = nil
             case .failure(let error):
                 completion(.failure(error))
+                self.task = nil
             }
         }
+        self.task = task
         task.resume()
     }
 }
