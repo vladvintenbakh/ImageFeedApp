@@ -14,6 +14,7 @@ final class SplashViewController: UIViewController {
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -24,6 +25,11 @@ final class SplashViewController: UIViewController {
                 switch result {
                 case .success(let profile):
                     switchToTabBarController()
+                    let username = profile.username
+                    self.profileImageService.fetchProfileImageURL(username: username) { _ in
+                        print("Profile image retrieved outside of the authorization process")
+                        print("Profile image URL: \(self.profileImageService.avatarURL ?? "")")
+                    }
                 case .failure:
                     break
                 }
@@ -83,10 +89,16 @@ extension SplashViewController: AuthViewControllerDelegate {
         profileService.fetchProfile(token) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success:
+            case .success(let profile):
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
-            case .failure:
+                let username = profile.username
+                self.profileImageService.fetchProfileImageURL(username: username) { _ in
+                    print("Profile image retrieved in the authorization process")
+                    print("Profile image URL: \(self.profileImageService.avatarURL ?? "")")
+                }
+            case .failure(let error):
+                print(error)
                 UIBlockingProgressHUD.dismiss()
                 break
             }
