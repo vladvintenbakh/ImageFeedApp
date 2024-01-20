@@ -18,6 +18,10 @@ class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
+    private let profileImageService = ProfileImageService.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +32,16 @@ class ProfileViewController: UIViewController {
         setUpLogoutButton()
         
         updateProfileDetails()
+        
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        
+        updateAvatar()
         
 //        print("UI set up")
 //        
@@ -148,6 +162,15 @@ class ProfileViewController: UIViewController {
         self.nameLabel.text = profile.name
         self.handleLabel.text = profile.loginName
         self.descriptionLabel.text = profile.bio
+    }
+    
+    private func updateAvatar() {
+        print("Calling updateAvatar")
+        guard
+            let profileImageURL = profileImageService.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        print("Successfully obtained the profile image URL: \(profileImageURL)")
     }
     
     @objc

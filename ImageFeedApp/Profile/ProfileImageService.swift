@@ -10,6 +10,7 @@ import UIKit
 final class ProfileImageService {
     
     static let shared = ProfileImageService()
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     private(set) var avatarURL: String?
     private let oAuth2TokenStorage = OAuth2TokenStorage()
@@ -28,6 +29,10 @@ final class ProfileImageService {
                 let avatarURL = userResult.profileImage.small
                 self.avatarURL = avatarURL
                 completion(.success(avatarURL))
+                NotificationCenter.default.post(
+                    name: ProfileImageService.didChangeNotification,
+                    object: self,
+                    userInfo: ["URL": avatarURL])
                 self.task = nil
             case .failure(let error):
                 completion(.failure(error))
