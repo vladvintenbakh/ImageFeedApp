@@ -26,10 +26,7 @@ final class SplashViewController: UIViewController {
                 case .success(let profile):
                     switchToTabBarController()
                     let username = profile.username
-                    self.profileImageService.fetchProfileImageURL(username: username) { _ in
-                        print("Profile image retrieved outside of the authorization process")
-                        print("Profile image URL: \(self.profileImageService.avatarURL ?? "")")
-                    }
+                    self.profileImageService.fetchProfileImageURL(username: username) { _ in }
                 case .failure:
                     break
                 }
@@ -76,7 +73,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token)
-            case .failure(let error):
+            case .failure:
                 UIBlockingProgressHUD.dismiss()
                 self.showNetworkErrorAlert()
                 break
@@ -92,11 +89,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
                 let username = profile.username
-                self.profileImageService.fetchProfileImageURL(username: username) { _ in
-                    print("Profile image retrieved in the authorization process")
-                    print("Profile image URL: \(self.profileImageService.avatarURL ?? "")")
-                }
-            case .failure(let error):
+                self.profileImageService.fetchProfileImageURL(username: username) { _ in }
+            case .failure:
                 UIBlockingProgressHUD.dismiss()
                 self.showNetworkErrorAlert()
                 break

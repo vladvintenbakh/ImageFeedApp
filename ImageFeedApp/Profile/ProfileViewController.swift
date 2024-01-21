@@ -165,12 +165,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func updateAvatar() {
-        print("Calling updateAvatar")
         guard
             let profileImageURL = profileImageService.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        print("Successfully obtained the profile image URL: \(profileImageURL)")
+        
     }
     
     @objc
