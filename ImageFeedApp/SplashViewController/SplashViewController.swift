@@ -78,9 +78,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfile(token)
             case .failure(let error):
                 UIBlockingProgressHUD.dismiss()
-                print(error)
+                self.showNetworkErrorAlert()
                 break
-                // TODO: Process the error
             }
         }
     }
@@ -98,10 +97,17 @@ extension SplashViewController: AuthViewControllerDelegate {
                     print("Profile image URL: \(self.profileImageService.avatarURL ?? "")")
                 }
             case .failure(let error):
-                print(error)
                 UIBlockingProgressHUD.dismiss()
+                self.showNetworkErrorAlert()
                 break
             }
         }
+    }
+    
+    private func showNetworkErrorAlert() {
+        let alert = UIAlertController(title: "Something went wrong", message: "Failed to log in", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }

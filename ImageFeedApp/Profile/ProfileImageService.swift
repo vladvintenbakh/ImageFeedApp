@@ -23,7 +23,7 @@ final class ProfileImageService {
         var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET")
         guard let bearerToken = oAuth2TokenStorage.token else { return }
         request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-        let task = object(for: request) { result in
+        let task = urlSession.objectTask(for: request) { (result: Result<UserResult, Error>) in
             switch result {
             case .success(let userResult):
                 let avatarURL = userResult.profileImage.small
@@ -45,18 +45,6 @@ final class ProfileImageService {
 }
 
 extension ProfileImageService {
-    private func object(
-        for request: URLRequest,
-        completion: @escaping (Result<UserResult, Error>) -> Void
-    ) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<UserResult, Error> in
-                Result { try decoder.decode(UserResult.self, from: data) }
-            }
-            completion(response)
-        }
-    }
     
     struct ImageSize: Codable {
         let small: String

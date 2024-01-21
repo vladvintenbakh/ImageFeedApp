@@ -28,7 +28,7 @@ final class ProfileService {
         task?.cancel()
         var request = URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET")
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        let task = object(for: request) { result in
+        let task = urlSession.objectTask(for: request) { (result: Result<ProfileResult, Error>) in
             switch result {
             case .success(let profileResult):
                 let profile = Profile(username: profileResult.username,
@@ -49,19 +49,6 @@ final class ProfileService {
 }
 
 extension ProfileService {
-    private func object(
-        for request: URLRequest,
-        completion: @escaping (Result<ProfileResult, Error>) -> Void
-    ) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<ProfileResult, Error> in
-                Result { try decoder.decode(ProfileResult.self, from: data) }
-            }
-            completion(response)
-        }
-    }
-    
     private struct ProfileResult: Codable {
         let username: String
         let firstName: String
