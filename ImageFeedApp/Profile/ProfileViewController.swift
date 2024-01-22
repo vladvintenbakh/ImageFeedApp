@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     
@@ -42,31 +43,6 @@ class ProfileViewController: UIViewController {
             }
         
         updateAvatar()
-        
-//        print("UI set up")
-//        
-//        guard let bearerToken = oAuth2TokenStorage.token else { return }
-//        
-//        print("Bearer token retrieved")
-//        print("Bearer token value: \(bearerToken)")
-        
-//        profileService.fetchProfile(bearerToken) { [weak self] result in
-//            print("fetchProfile started executing")
-//            guard let self = self else { return }
-//            print("self unwrapped")
-//            switch result {
-//            case .success(let profile):
-//                print("Successfully retrieved the profile")
-//                self.nameLabel.text = profile.name
-//                self.handleLabel.text = profile.loginName
-//                self.descriptionLabel.text = profile.bio
-//            case .failure(let error):
-//                print("Failed with an error")
-//                print(error)
-//                break
-//                // TODO: process the error
-//            }
-//        }
     }
     
     private func setUpProfileImage() {
@@ -165,11 +141,14 @@ class ProfileViewController: UIViewController {
     }
     
     private func updateAvatar() {
-        guard
-            let profileImageURL = profileImageService.avatarURL,
-            let url = URL(string: profileImageURL)
+        guard let profileImageURL = profileImageService.avatarURL,
+              let url = URL(string: profileImageURL)
         else { return }
-        
+//        let testImageURL = URL(string: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")!
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(with: url,
+                                     options: [.processor(processor)])
     }
     
     @objc
@@ -177,4 +156,3 @@ class ProfileViewController: UIViewController {
         
     }
 }
-
