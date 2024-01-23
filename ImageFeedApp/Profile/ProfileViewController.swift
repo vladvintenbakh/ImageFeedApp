@@ -144,11 +144,15 @@ class ProfileViewController: UIViewController {
         guard let profileImageURL = profileImageService.avatarURL,
               let url = URL(string: profileImageURL)
         else { return }
+//        let cache = ImageCache.default
+//        cache.clearMemoryCache()
+//        cache.clearDiskCache { print("Done") }
 //        let testImageURL = URL(string: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")!
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: url,
-                                     options: [.processor(processor)])
+                                     options: [.processor(processor),
+                                               .cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
     
     @objc
