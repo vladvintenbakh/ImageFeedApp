@@ -23,6 +23,7 @@
 		35677C902B42C80900BAEB57 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35677C8F2B42C80900BAEB57 /* URLSession+data.swift */; };
 		358C4DA22B35A51D00262E90 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C4DA12B35A51D00262E90 /* SingleImageViewController.swift */; };
 		35B121672B58DF470055DBA3 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B121662B58DF470055DBA3 /* ProfileService.swift */; };
+		35B55BB82B5FC4B200D52E01 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B55BB72B5FC4B200D52E01 /* TabBarController.swift */; };
 		35C1AAF92B3314C100025BCD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C1AAF82B3314C100025BCD /* ProfileViewController.swift */; };
 		35C891832B5E8B7E00789068 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 35C891822B5E8B7E00789068 /* SwiftKeychainWrapper */; };
 		35CF3B722B5A2B7700877E59 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF3B712B5A2B7700877E59 /* ProfileImageService.swift */; };
@@ -49,6 +50,7 @@
 		35677C8F2B42C80900BAEB57 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		358C4DA12B35A51D00262E90 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		35B121662B58DF470055DBA3 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		35B55BB72B5FC4B200D52E01 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		35C1AAF82B3314C100025BCD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		35CF3B712B5A2B7700877E59 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		35D937E82B3F088C0096AAC2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		3558B5932B198B7E00C9A0CA /* ImageFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				35B55BB92B5FC4BB00D52E01 /* TabBarController */,
 				350810D82B57FEB800074D56 /* UIBlockingProgressHUD.swift */,
 				355718E02B4BEFC5006CD850 /* SplashViewController */,
 				354B10642B450DA600D1CE57 /* ServiceAccessLayer */,
@@ -149,6 +152,14 @@
 				358C4DA12B35A51D00262E90 /* SingleImageViewController.swift */,
 			);
 			path = SingleImageView;
+			sourceTree = "<group>";
+		};
+		35B55BB92B5FC4BB00D52E01 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				35B55BB72B5FC4B200D52E01 /* TabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		35C1AAFA2B33302300025BCD /* Profile */ = {
@@ -263,6 +274,7 @@
 				3558B5992B198B7E00C9A0CA /* ImageListViewController.swift in Sources */,
 				35B121672B58DF470055DBA3 /* ProfileService.swift in Sources */,
 				35FCC9112B1ECE6E0064EC70 /* ImageListCell.swift in Sources */,
+				35B55BB82B5FC4B200D52E01 /* TabBarController.swift in Sources */,
 				35C1AAF92B3314C100025BCD /* ProfileViewController.swift in Sources */,
 				35677C8E2B42C4B500BAEB57 /* URLRequest+makeHTTPRequest.swift in Sources */,
 				3558B5952B198B7E00C9A0CA /* AppDelegate.swift in Sources */,
