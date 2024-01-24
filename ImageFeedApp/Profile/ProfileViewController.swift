@@ -148,9 +148,6 @@ class ProfileViewController: UIViewController {
         guard let profileImageURL = profileImageService.avatarURL,
               let url = URL(string: profileImageURL)
         else { return }
-//        let cache = ImageCache.default
-//        cache.clearMemoryCache()
-//        cache.clearDiskCache { print("Done") }
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: url,
                                      options: [.cacheSerializer(FormatIndicatedCacheSerializer.png)])

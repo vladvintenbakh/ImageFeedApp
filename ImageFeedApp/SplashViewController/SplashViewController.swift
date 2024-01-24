@@ -6,11 +6,8 @@
 //
 
 import UIKit
-//import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
-    
-//    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
@@ -21,7 +18,6 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        KeychainWrapper.standard.removeObject(forKey: "authToken")
         view.backgroundColor = UIColor(named: "YPBlack")
         setUpSplashScreenLogo()
     }
@@ -42,7 +38,6 @@ final class SplashViewController: UIViewController {
                 }
             }
         } else {
-//            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
             print("About to call switchToAuthViewController")
             switchToAuthViewController()
         }
@@ -69,20 +64,6 @@ final class SplashViewController: UIViewController {
         ])
     }
 }
-
-//extension SplashViewController {
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-//            guard
-//                let navigationController = segue.destination as? UINavigationController,
-//                let viewController = navigationController.viewControllers[0] as? AuthViewController
-//            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
-//            viewController.delegate = self
-//        } else {
-//            super.prepare(for: segue, sender: sender)
-//        }
-//    }
-//}
 
 extension SplashViewController: AuthViewControllerDelegate {
     private func switchToAuthViewController() {
