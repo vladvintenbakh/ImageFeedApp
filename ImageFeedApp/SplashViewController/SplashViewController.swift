@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
     
@@ -21,7 +20,6 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        KeychainWrapper.standard.removeObject(forKey: "authToken")
         view.backgroundColor = UIColor(named: "YPBlack")
         setUpSplashScreenLogo()
     }
@@ -88,11 +86,11 @@ extension SplashViewController: AuthViewControllerDelegate {
     private func switchToAuthViewController() {
         let viewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthViewController")
         print("Successfully obtained the auth view controller")
-        guard let authViewController = viewController as? AuthViewController else { return }
+        guard let viewController = viewController as? AuthViewController else { return }
         print("Successfully unwrapped as AuthViewController")
-        authViewController.delegate = self
-        authViewController.modalPresentationStyle = .fullScreen
-        present(authViewController, animated: true)
+        viewController.delegate = self
+        viewController.modalPresentationStyle = .overFullScreen
+        present(viewController, animated: true)
     }
     
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
