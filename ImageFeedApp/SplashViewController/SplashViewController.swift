@@ -6,6 +6,7 @@
 //
 
 import UIKit
+//import SwiftKeychainWrapper
 
 final class SplashViewController: UIViewController {
     
@@ -20,6 +21,7 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        KeychainWrapper.standard.removeObject(forKey: "authToken")
         view.backgroundColor = UIColor(named: "YPBlack")
         setUpSplashScreenLogo()
     }
@@ -109,8 +111,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfile(token)
             case .failure:
                 UIBlockingProgressHUD.dismiss()
-                self.showNetworkErrorAlert()
-                break
+                self.showNetworkErrorAlert(message: "Failed to log in")
             }
         }
     }
@@ -126,15 +127,17 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.profileImageService.fetchProfileImageURL(username: username) { _ in }
             case .failure:
                 UIBlockingProgressHUD.dismiss()
-                self.showNetworkErrorAlert()
+                self.showNetworkErrorAlert(message: "Failed to fetch profile")
                 break
             }
         }
     }
     
-    private func showNetworkErrorAlert() {
-        let alert = UIAlertController(title: "Something went wrong", message: "Failed to log in", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+    private func showNetworkErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Something went wrong", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Back to login screen", style: .default) { _ in
+            self.switchToAuthViewController()
+        }
         alert.addAction(alertAction)
         self.present(alert, animated: true, completion: nil)
     }
