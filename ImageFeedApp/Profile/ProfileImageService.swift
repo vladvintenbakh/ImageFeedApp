@@ -26,7 +26,7 @@ final class ProfileImageService {
         let task = urlSession.objectTask(for: request) { (result: Result<UserResult, Error>) in
             switch result {
             case .success(let userResult):
-                let avatarURL = userResult.profileImage.small
+                let avatarURL = userResult.profileImage.large
                 self.avatarURL = avatarURL
                 completion(.success(avatarURL))
                 NotificationCenter.default.post(
@@ -47,7 +47,7 @@ final class ProfileImageService {
 extension ProfileImageService {
     
     struct ImageSize: Codable {
-        let small: String
+        let large: String
     }
     
     struct UserResult: Codable {

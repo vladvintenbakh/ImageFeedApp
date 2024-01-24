@@ -45,14 +45,18 @@ class ProfileViewController: UIViewController {
         updateAvatar()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        profileImageView.clipsToBounds = true
+    }
+    
     private func setUpProfileImage() {
         let imageView = UIImageView()
         profileImageView = imageView
         
         imageView.image = UIImage(named: "Profile Picture")
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = imageView.frame.size.width / 2
-        imageView.clipsToBounds = true
         view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
@@ -147,12 +151,9 @@ class ProfileViewController: UIViewController {
 //        let cache = ImageCache.default
 //        cache.clearMemoryCache()
 //        cache.clearDiskCache { print("Done") }
-//        let testImageURL = URL(string: "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")!
-        let processor = RoundCornerImageProcessor(cornerRadius: 20)
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: url,
-                                     options: [.processor(processor),
-                                               .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+                                     options: [.cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
     
     @objc
