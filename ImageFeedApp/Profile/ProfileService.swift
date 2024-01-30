@@ -32,9 +32,9 @@ final class ProfileService {
             switch result {
             case .success(let profileResult):
                 let profile = Profile(username: profileResult.username,
-                                      name: "\(profileResult.firstName) \(profileResult.lastName)",
+                                      name: "\(profileResult.firstName) \(profileResult.lastName ?? "")",
                                       loginName: "@\(profileResult.username)",
-                                      bio: profileResult.bio)
+                                      bio: profileResult.bio ?? "")
                 self.profile = profile
                 completion(.success(profile))
                 self.task = nil
@@ -52,8 +52,8 @@ extension ProfileService {
     private struct ProfileResult: Codable {
         let username: String
         let firstName: String
-        let lastName: String
-        let bio: String
+        let lastName: String?
+        let bio: String?
         
         enum CodingKeys: String, CodingKey {
             case username
