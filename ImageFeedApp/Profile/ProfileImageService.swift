@@ -43,18 +43,3 @@ final class ProfileImageService {
         task.resume()
     }
 }
-
-extension ProfileImageService {
-    
-    struct ImageSize: Codable {
-        let large: String
-    }
-    
-    struct UserResult: Codable {
-        let profileImage: ImageSize
-        
-        enum CodingKeys: String, CodingKey {
-            case profileImage = "profile_image"
-        }
-    }
-}
