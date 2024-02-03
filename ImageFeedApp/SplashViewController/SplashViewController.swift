@@ -38,7 +38,6 @@ final class SplashViewController: UIViewController {
                 }
             }
         } else {
-            print("About to call switchToAuthViewController")
             switchToAuthViewController()
         }
     }
@@ -68,9 +67,7 @@ final class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     private func switchToAuthViewController() {
         let viewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthViewController")
-        print("Successfully obtained the auth view controller")
         guard let viewController = viewController as? AuthViewController else { return }
-        print("Successfully unwrapped as AuthViewController")
         viewController.delegate = self
         viewController.modalPresentationStyle = .overFullScreen
         present(viewController, animated: true)
