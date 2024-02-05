@@ -20,7 +20,8 @@ final class ImageListService {
         task?.cancel()
         
         let nextPage = lastLoadedPage == nil ? 1 : lastLoadedPage! + 1
-        var urlComponents = URLComponents(string: defaultBaseURL.absoluteString)
+        let imageListURL = defaultBaseURL.absoluteString + "/photos"
+        var urlComponents = URLComponents(string: imageListURL)
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(nextPage)"),
         ]
@@ -30,14 +31,43 @@ final class ImageListService {
         
         let task = urlSession.objectTask(for: request) { (result: Result<[PhotoResult], Error>) in
             switch result {
+                
             case .success(let photoResultList):
-                // TODO: convert to Photo, update the photos array, post notification
-                let firstPhoto = photoResultList[0]
-                print(firstPhoto.urls.full)
+                
+                for photoResult in photoResultList {
+                    
+                    let photoSize = CGSize(width: Double(photoResult.width),
+                                           height: Double(photoResult.height))
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    var photoCreatedDate: Date?
+                    if let parsedDate = photoResult.createdAt {
+                        photoCreatedDate = dateFormatter.date(from: parsedDate)
+                    }
+                    
+                    let photo = Photo(
+                        id: photoResult.id,
+                        size: photoSize,
+                        createdAt: photoCreatedDate,
+                        welcomeDescription: photoResult.description,
+                        thumbImageURL: photoResult.urls.thumb,
+                        largeImageURL: photoResult.urls.full,
+                        isLiked: photoResult.isLikedByUser)
+                    
+                    self.photos.append(photo)
+                }
+                
+                NotificationCenter.default.post(
+                    name: ImageListService.didChangeNotification,
+                    object: self)
+                
+                self.task = nil
+                
             case .failure(let error):
-                // TODO: clean up based on the requirements
                 print("Failed with error: \(error)")
-                break
+                self.task = nil
             }
         }
         
