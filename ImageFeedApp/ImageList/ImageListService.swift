@@ -34,7 +34,6 @@ final class ImageListService {
         
         let task = urlSession.objectTask(for: request) { (result: Result<[PhotoResult], Error>) in
             switch result {
-                
             case .success(let photoResultList):
                 
                 for photoResult in photoResultList {
@@ -78,29 +77,3 @@ final class ImageListService {
         task.resume()
     }
 }
-
-//func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
-//    assert(Thread.isMainThread)
-//    task?.cancel()
-//    var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET")
-//    guard let bearerToken = oAuth2TokenStorage.token else { return }
-//    request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
-//    let task = urlSession.objectTask(for: request) { (result: Result<UserResult, Error>) in
-//        switch result {
-//        case .success(let userResult):
-//            let avatarURL = userResult.profileImage.large
-//            self.avatarURL = avatarURL
-//            completion(.success(avatarURL))
-//            NotificationCenter.default.post(
-//                name: ProfileImageService.didChangeNotification,
-//                object: self,
-//                userInfo: ["URL": avatarURL])
-//            self.task = nil
-//        case .failure(let error):
-//            completion(.failure(error))
-//            self.task = nil
-//        }
-//    }
-//    self.task = task
-//    task.resume()
-//}
