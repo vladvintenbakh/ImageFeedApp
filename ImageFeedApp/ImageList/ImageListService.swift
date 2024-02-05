@@ -11,6 +11,7 @@ final class ImageListService {
     static let didChangeNotification = Notification.Name(rawValue: "ImageListServiceDidChange")
     
     private let urlSession = URLSession.shared
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
     private(set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     private var task: URLSessionTask?
@@ -28,6 +29,8 @@ final class ImageListService {
         guard let finalUrl = urlComponents?.url else { fatalError("Failed to create URL from components") }
         var request = URLRequest(url: finalUrl)
         request.httpMethod = "GET"
+        guard let bearerToken = oAuth2TokenStorage.token else { return }
+        request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
         
         let task = urlSession.objectTask(for: request) { (result: Result<[PhotoResult], Error>) in
             switch result {
