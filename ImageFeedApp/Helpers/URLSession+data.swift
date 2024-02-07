@@ -27,7 +27,7 @@ extension URLSession {
         }
     }
     
-    private func data(for request: URLRequest,
+    func data(for request: URLRequest,
               completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
         
         let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
