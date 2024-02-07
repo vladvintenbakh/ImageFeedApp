@@ -7,6 +7,8 @@
 
 import UIKit
 import Kingfisher
+import WebKit
+import SwiftKeychainWrapper
 
 class ProfileViewController: UIViewController {
     
@@ -155,6 +157,25 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didPressLogoutButton() {
-        
+        KeychainWrapper.standard.removeObject(forKey: oAuth2TokenStorage.storageKey)
+        clearCookies()
+        switchToSplashViewController()
+    }
+    
+    private func clearCookies() {
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes,
+                                                        for: [record],
+                                                        completionHandler: {})
+            }
+        }
+    }
+    
+    private func switchToSplashViewController() {
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        let splashViewController = SplashViewController()
+        window.rootViewController = splashViewController
     }
 }
