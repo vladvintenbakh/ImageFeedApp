@@ -45,8 +45,11 @@ final class ImageListViewController: UIViewController {
         if segue.identifier == showSingleImageSegueIdentifier {
             let viewController = segue.destination as! SingleImageViewController
             let indexPath = sender as! IndexPath
-            let image = UIImage(named: photoNames[indexPath.row]) // change this to work with the kf loaded photos too
-            viewController.image = image
+//            let image = UIImage(named: photoNames[indexPath.row])
+            viewController.image = UIImage()
+            let stringURL = photos[indexPath.row].largeImageURL
+            guard let fullImageURL = URL(string: stringURL) else { return }
+            viewController.fullImageURL = fullImageURL
         } else {
             super.prepare(for: segue, sender: sender)
         }
