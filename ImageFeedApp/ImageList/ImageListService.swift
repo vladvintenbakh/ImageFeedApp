@@ -103,7 +103,6 @@ final class ImageListService {
                 let voidReturn: Void = ()
                 completion(.success(voidReturn))
             case .failure(let error):
-                // TODO: process the error
                 completion(.failure(error))
             }
         }
