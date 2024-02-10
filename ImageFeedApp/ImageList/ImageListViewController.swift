@@ -145,8 +145,17 @@ extension ImageListViewController: ImageListCellDelegate {
                 UIBlockingProgressHUD.dismiss()
             case .failure:
                 UIBlockingProgressHUD.dismiss()
-                // TODO: display the error message using UIAlertController
+                self.showLikeErrorAlert()
             }
         }
+    }
+    
+    private func showLikeErrorAlert() {
+        let alert = UIAlertController(title: "Something went wrong",
+                                      message: "Unable to add/remove like",
+                                      preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Dismiss", style: .default)
+        alert.addAction(alertAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
