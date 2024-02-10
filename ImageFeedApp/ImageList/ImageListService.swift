@@ -42,9 +42,7 @@ final class ImageListService {
                     let photoSize = CGSize(width: Double(photoResult.width),
                                            height: Double(photoResult.height))
                     
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-                    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                    let dateFormatter = ISO8601DateFormatter()
                     var photoCreatedDate: Date?
                     if let parsedDate = photoResult.createdAt {
                         photoCreatedDate = dateFormatter.date(from: parsedDate)

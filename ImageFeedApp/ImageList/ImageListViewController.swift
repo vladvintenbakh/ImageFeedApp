@@ -102,8 +102,8 @@ extension ImageListViewController: UITableViewDataSource {
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
-        let currentDate = Date()
-        cell.dateLabel.text = dateFormatter.string(from: currentDate)
+        let createdDate = photo.createdAt
+        cell.dateLabel.text = createdDate != nil ? dateFormatter.string(from: createdDate!) : ""
         
         let likeImage = photo.isLiked ? UIImage(named: "Active Like") : UIImage(named: "Inactive Like")
         cell.likeButton.setImage(likeImage, for: .normal)
