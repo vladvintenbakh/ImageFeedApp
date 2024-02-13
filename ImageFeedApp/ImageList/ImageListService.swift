@@ -10,6 +10,7 @@ import Foundation
 final class ImageListService {
     static let didChangeNotification = Notification.Name(rawValue: "ImageListServiceDidChange")
     
+    private let dateFormatter = ISO8601DateFormatter()
     private let urlSession = URLSession.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     private(set) var photos: [Photo] = []
@@ -42,10 +43,9 @@ final class ImageListService {
                     let photoSize = CGSize(width: Double(photoResult.width),
                                            height: Double(photoResult.height))
                     
-                    let dateFormatter = ISO8601DateFormatter()
                     var photoCreatedDate: Date?
                     if let parsedDate = photoResult.createdAt {
-                        photoCreatedDate = dateFormatter.date(from: parsedDate)
+                        photoCreatedDate = self.dateFormatter.date(from: parsedDate)
                     }
                     
                     let photo = Photo(
