@@ -8,7 +8,6 @@
 import UIKit
 
 class ImageListViewController: UIViewController {
-
     @IBOutlet private var tableView: UITableView!
     
     private let photoNames: [String] = Array(0..<20).map{ "\($0)" }
@@ -25,7 +24,6 @@ class ImageListViewController: UIViewController {
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
-
 }
 
 extension ImageListViewController: UITableViewDataSource {
@@ -62,7 +60,6 @@ extension ImageListViewController: UITableViewDataSource {
     }
     
     func configCell(for cell: ImageListCell, with indexPath: IndexPath) {
-        
         let photoName = photoNames[indexPath.row]
         let photo = UIImage(named: photoName)
         
@@ -82,9 +79,5 @@ extension ImageListViewController: UITableViewDataSource {
 }
 
 extension ImageListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
     
 }
