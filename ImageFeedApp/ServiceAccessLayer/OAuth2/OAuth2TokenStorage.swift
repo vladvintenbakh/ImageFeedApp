@@ -6,19 +6,20 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     
     let storageKey = "authToken"
     
-    private let userDefaults = UserDefaults.standard
+    private let keychainWrapper = KeychainWrapper.standard
     
     var token: String? {
         get {
-            userDefaults.string(forKey: storageKey)
+            keychainWrapper.string(forKey: storageKey)
         }
         set {
-            userDefaults.set(newValue, forKey: storageKey)
+            keychainWrapper.set(newValue ?? "", forKey: storageKey)
         }
     }
     
