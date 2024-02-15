@@ -43,6 +43,9 @@
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="Active Like"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked" destination="8El-TI-9az" eventType="touchUpInside" id="bPU-mb-ydH"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 August 2023" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqO-mR-ElF" userLabel="Date Label">
                                                     <rect key="frame" x="24.000000000000007" y="226" width="96.666666666666686" height="16"/>
