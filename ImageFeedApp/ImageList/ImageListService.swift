@@ -23,7 +23,7 @@ final class ImageListService {
         
         let nextPage = lastLoadedPage == nil ? 1 : lastLoadedPage! + 1
         lastLoadedPage = nextPage
-        let imageListURL = defaultBaseURL.absoluteString + "/photos"
+        let imageListURL = defaultBaseURLConstant.absoluteString + "/photos"
         var urlComponents = URLComponents(string: imageListURL)
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(nextPage)"),

@@ -7,8 +7,6 @@
 
 import UIKit
 
-fileprivate let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-
 protocol WebViewPresenterProtocol {
     var view: WebViewViewControllerProtocol? { get set }
     func viewDidLoad()
@@ -20,12 +18,12 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     weak var view: WebViewViewControllerProtocol?
     
     func viewDidLoad() {
-        var urlComponents = URLComponents(string: unsplashAuthorizeURLString)!
+        var urlComponents = URLComponents(string: unsplashAuthorizeURLStringConstant)!
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: accessKey),
-            URLQueryItem(name: "redirect_uri", value: redirectURI),
+            URLQueryItem(name: "client_id", value: accessKeyConstant),
+            URLQueryItem(name: "redirect_uri", value: redirectURIConstant),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: accessScope)
+            URLQueryItem(name: "scope", value: accessScopeConstant)
         ]
         let url = urlComponents.url!
         let request = URLRequest(url: url)
