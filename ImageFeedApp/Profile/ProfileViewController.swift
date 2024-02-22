@@ -182,7 +182,7 @@ class ProfileViewController: UIViewController {
                                       message: nil,
                                       preferredStyle: .alert)
         
-        let yesAction = UIAlertAction(title: "Proceed", style: .default) { _ in
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
             KeychainWrapper.standard.removeObject(
                 forKey: self.oAuth2TokenStorage.storageKey
             )
@@ -191,7 +191,7 @@ class ProfileViewController: UIViewController {
         }
         alert.addAction(yesAction)
         
-        let noAction = UIAlertAction(title: "Back to profile", style: .default)
+        let noAction = UIAlertAction(title: "No", style: .default)
         alert.addAction(noAction)
         
         self.present(alert, animated: true, completion: nil)
