@@ -41,4 +41,30 @@ final class ImageFeedAppTests: XCTestCase {
         // Then
         XCTAssertTrue(viewController.loadRequestCalled)
     }
+    
+    func testProgressVisibleWhenLessThanOne() {
+        // Given
+        let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        let progress: Float = 0.6
+        
+        // When
+        let shouldHideProgress = presenter.shouldHideProgress(for: progress)
+        
+        // Then
+        XCTAssertFalse(shouldHideProgress)
+    }
+    
+    func testProgressHiddenWhenOne() {
+        // Given
+        let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        let progress: Float = 1.0
+        
+        // When
+        let shouldHideProgress = presenter.shouldHideProgress(for: progress)
+        
+        // Then
+        XCTAssertTrue(shouldHideProgress)
+    }
 }
