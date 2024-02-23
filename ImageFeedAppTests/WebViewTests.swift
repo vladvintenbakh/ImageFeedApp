@@ -67,4 +67,38 @@ final class ImageFeedAppTests: XCTestCase {
         // Then
         XCTAssertTrue(shouldHideProgress)
     }
+    
+    func testAuthHelperURL() {
+        // Given
+        let configuration = AuthConfiguration.standard
+        let authHelper = AuthHelper(configuration: configuration)
+        
+        // When
+        let url = authHelper.authURL()
+        let urlString = url.absoluteString
+        
+        // Then
+        XCTAssertTrue(urlString.contains(configuration.authURLString))
+        XCTAssertTrue(urlString.contains(configuration.accessKey))
+        XCTAssertTrue(urlString.contains(configuration.redirectURI))
+        XCTAssertTrue(urlString.contains("code"))
+        XCTAssertTrue(urlString.contains(configuration.accessScope))
+    }
+    
+    func testCodeFromURL() {
+        // Given
+        let urlString = "https://unsplash.com/oauth/authorize/native"
+        var urlComponents = URLComponents(string: urlString)!
+        urlComponents.queryItems = [
+            URLQueryItem(name: "code", value: "test code")
+        ]
+        let url = urlComponents.url!
+        let authHelper = AuthHelper()
+        
+        // When
+        let code = authHelper.code(from: url)
+        
+        // Then
+        XCTAssertEqual(code, "test code")
+    }
 }
