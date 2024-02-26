@@ -126,6 +126,7 @@ class ProfileViewController: UIViewController {
             with: UIImage(named: "Exit") ?? UIImage(),
             target: self,
             action: #selector(didPressLogoutButton))
+        button.accessibilityIdentifier = "LogoutButton"
         logoutButton = button
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -181,6 +182,8 @@ class ProfileViewController: UIViewController {
         let alert = UIAlertController(title: "Confirm logout?",
                                       message: nil,
                                       preferredStyle: .alert)
+        
+        alert.view.accessibilityIdentifier = "LogoutConfirmationAlert"
         
         let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
             KeychainWrapper.standard.removeObject(
