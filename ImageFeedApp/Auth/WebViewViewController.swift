@@ -40,27 +40,19 @@ final class WebViewViewController: UIViewController, WebViewViewControllerProtoc
             options: [],
             changeHandler: { [weak self] _, _ in
                 guard let self = self else { return }
-//                self.updateProgress()
                 presenter?.didUpdateProgressValue(webView.estimatedProgress)
             })
         
         presenter?.viewDidLoad()
-//        updateProgress()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        updateProgress()
     }
     
     func load(request: URLRequest) {
         webView.load(request)
     }
-    
-//    private func updateProgress() {
-//        progressView.progress = Float(webView.estimatedProgress)
-//        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
-//    }
     
     func setProgressValue(_ newValue: Float) {
         progressView.progress = newValue
