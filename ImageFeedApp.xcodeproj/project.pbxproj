@@ -45,6 +45,8 @@
 		60F126DF2B6E55D500AB0603 /* ImageListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F126DE2B6E55D500AB0603 /* ImageListService.swift */; };
 		60F126E12B6E56E400AB0603 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F126E02B6E56E400AB0603 /* Photo.swift */; };
 		60FC254C2B900F3C00614E53 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC254B2B900F3C00614E53 /* ProfilePresenter.swift */; };
+		60FC254E2B90BF7C00614E53 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC254D2B90BF7C00614E53 /* ProfileViewTests.swift */; };
+		60FC25502B90C00A00614E53 /* ProfilePresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC254F2B90C00A00614E53 /* ProfilePresenterSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,8 @@
 		60F126DE2B6E55D500AB0603 /* ImageListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListService.swift; sourceTree = "<group>"; };
 		60F126E02B6E56E400AB0603 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		60FC254B2B900F3C00614E53 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		60FC254D2B90BF7C00614E53 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
+		60FC254F2B90C00A00614E53 /* ProfilePresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +270,8 @@
 				601E18E32B872D8400D1D4E3 /* WebViewTests.swift */,
 				601E18EA2B8730DD00D1D4E3 /* WebViewPresenterSpy.swift */,
 				601E18EC2B8732AB00D1D4E3 /* WebViewViewControllerSpy.swift */,
+				60FC254D2B90BF7C00614E53 /* ProfileViewTests.swift */,
+				60FC254F2B90C00A00614E53 /* ProfilePresenterSpy.swift */,
 			);
 			path = ImageFeedAppTests;
 			sourceTree = "<group>";
@@ -466,8 +472,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60FC254E2B90BF7C00614E53 /* ProfileViewTests.swift in Sources */,
 				601E18E42B872D8400D1D4E3 /* WebViewTests.swift in Sources */,
 				601E18ED2B8732AB00D1D4E3 /* WebViewViewControllerSpy.swift in Sources */,
+				60FC25502B90C00A00614E53 /* ProfilePresenterSpy.swift in Sources */,
 				601E18EB2B8730DD00D1D4E3 /* WebViewPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

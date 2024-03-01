@@ -8,7 +8,7 @@
 @testable import ImageFeedApp
 import XCTest
 
-final class ImageFeedAppTests: XCTestCase {
+final class WebViewTests: XCTestCase {
     func testViewControllerCallsViewDidLoad() {
         // Given
         let storyboard = UIStoryboard(name: "Main", bundle: .main)

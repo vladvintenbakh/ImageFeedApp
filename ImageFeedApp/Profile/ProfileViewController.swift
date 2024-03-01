@@ -19,9 +19,9 @@ protocol ProfileViewProtocol: AnyObject {
 class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     private var profileImageView: UIImageView!
-    private var nameLabel: UILabel!
-    private var handleLabel: UILabel!
-    private var descriptionLabel: UILabel!
+    var nameLabel: UILabel!
+    var handleLabel: UILabel!
+    var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
     
     var presenter: ProfilePresenterProtocol?
@@ -94,7 +94,7 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
         ])
     }
     
-    private func setUpDescriptionLabel() {
+    func setUpDescriptionLabel() {
         let label = UILabel()
         descriptionLabel = label
         
