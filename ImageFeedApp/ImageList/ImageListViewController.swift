@@ -9,15 +9,15 @@ import UIKit
 import Kingfisher
 
 final class ImageListViewController: UIViewController {
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     
-    private let photoNames: [String] = Array(0..<20).map{ "\($0)" }
+//    private let photoNames: [String] = Array(0..<20).map{ "\($0)" }
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     private let imageListService = ImageListService()
-    private var photos: [Photo] = []
+    var photos: [Photo] = []
     private var imageListServiceObserver: NSObjectProtocol?
     
-    private lazy var dateFormatter: DateFormatter = {
+    lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMMM yyyy"
         formatter.locale = Locale(identifier: "en_EN")
