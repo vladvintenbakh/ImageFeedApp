@@ -10,7 +10,7 @@ import UIKit
 extension URLRequest {
     static func makeHTTPRequest(path: String,
                                 httpMethod: String,
-                                baseURL: URL = defaultBaseURL) -> URLRequest {
+                                baseURL: URL = defaultBaseURLConstant) -> URLRequest {
         let url = URL(string: path, relativeTo: baseURL)
         var request = URLRequest(url: url!)
         request.httpMethod = httpMethod

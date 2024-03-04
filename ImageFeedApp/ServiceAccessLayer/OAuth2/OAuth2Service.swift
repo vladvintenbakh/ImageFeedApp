@@ -54,9 +54,9 @@ final class OAuth2Service {
 extension OAuth2Service {
     private func authTokenRequest(code: String) -> URLRequest {
         var pathString = "/oauth/token"
-        pathString += "?client_id=\(accessKey)"
-        pathString += "&&client_secret=\(secretKey)"
-        pathString += "&&redirect_uri=\(redirectURI)"
+        pathString += "?client_id=\(accessKeyConstant)"
+        pathString += "&&client_secret=\(secretKeyConstant)"
+        pathString += "&&redirect_uri=\(redirectURIConstant)"
         pathString += "&&code=\(code)"
         pathString += "&&grant_type=authorization_code"
         let url = URL(string: "https://unsplash.com")

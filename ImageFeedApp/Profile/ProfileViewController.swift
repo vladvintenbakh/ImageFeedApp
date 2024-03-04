@@ -7,23 +7,24 @@
 
 import UIKit
 import Kingfisher
-import WebKit
-import SwiftKeychainWrapper
 
-class ProfileViewController: UIViewController {
+protocol ProfileViewProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+    func updateProfileInfoLabels(name: String, loginName: String, bio: String)
+    func updateProfileAvatar(avatarURL: URL)
+    func showProfileLogoutConfirmationAlert()
+    func navigateToSplashScreen(_ destinationScreen: UIViewController)
+}
+
+class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     private var profileImageView: UIImageView!
-    private var nameLabel: UILabel!
-    private var handleLabel: UILabel!
-    private var descriptionLabel: UILabel!
+    var nameLabel: UILabel!
+    var handleLabel: UILabel!
+    var descriptionLabel: UILabel!
     private var logoutButton: UIButton!
     
-    private let profileService = ProfileService.shared
-    private let oAuth2TokenStorage = OAuth2TokenStorage()
-    
-    private var profileImageServiceObserver: NSObjectProtocol?
-    
-    private let profileImageService = ProfileImageService.shared
+    var presenter: ProfilePresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,17 +35,7 @@ class ProfileViewController: UIViewController {
         setUpDescriptionLabel()
         setUpLogoutButton()
         
-        updateProfileDetails()
-        
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
-            object: nil,
-            queue: .main) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
-        
-        updateAvatar()
+        presenter?.viewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
@@ -103,7 +94,7 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    private func setUpDescriptionLabel() {
+    func setUpDescriptionLabel() {
         let label = UILabel()
         descriptionLabel = label
         
@@ -126,6 +117,7 @@ class ProfileViewController: UIViewController {
             with: UIImage(named: "Exit") ?? UIImage(),
             target: self,
             action: #selector(didPressLogoutButton))
+        button.accessibilityIdentifier = "LogoutButton"
         logoutButton = button
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -139,61 +131,43 @@ class ProfileViewController: UIViewController {
         ])
     }
     
-    private func updateProfileDetails() {
-        guard let profile = profileService.profile else { return }
-        self.nameLabel.text = profile.name
-        self.handleLabel.text = profile.loginName
-        self.descriptionLabel.text = profile.bio
+    func updateProfileInfoLabels(name: String, loginName: String, bio: String) {
+        nameLabel.text = name
+        handleLabel.text = loginName
+        descriptionLabel.text = bio
     }
     
-    private func updateAvatar() {
-        guard let profileImageURL = profileImageService.avatarURL,
-              let url = URL(string: profileImageURL)
-        else { return }
+    func updateProfileAvatar(avatarURL: URL) {
         profileImageView.kf.indicatorType = .activity
-        profileImageView.kf.setImage(with: url,
+        profileImageView.kf.setImage(with: avatarURL,
                                      options: [.cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
     
     @objc
     private func didPressLogoutButton() {
-        showLogoutConfirmationAlert()
+        showProfileLogoutConfirmationAlert()
     }
     
-    private func clearCookies() {
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-            records.forEach { record in
-                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes,
-                                                        for: [record],
-                                                        completionHandler: {})
-            }
-        }
-    }
-    
-    private func switchToSplashViewController() {
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let splashViewController = SplashViewController()
-        window.rootViewController = splashViewController
-    }
-    
-    private func showLogoutConfirmationAlert() {
+    func showProfileLogoutConfirmationAlert() {
         let alert = UIAlertController(title: "Confirm logout?",
                                       message: nil,
                                       preferredStyle: .alert)
         
-        let yesAction = UIAlertAction(title: "Proceed", style: .default) { _ in
-            KeychainWrapper.standard.removeObject(
-                forKey: self.oAuth2TokenStorage.storageKey
-            )
-            self.clearCookies()
-            self.switchToSplashViewController()
+        alert.view.accessibilityIdentifier = "LogoutConfirmationAlert"
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+            self.presenter?.logoutConfirmed()
         }
         alert.addAction(yesAction)
         
-        let noAction = UIAlertAction(title: "Back to profile", style: .default)
+        let noAction = UIAlertAction(title: "No", style: .default)
         alert.addAction(noAction)
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func navigateToSplashScreen(_ destinationScreen: UIViewController) {
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        window.rootViewController = destinationScreen
     }
 }
