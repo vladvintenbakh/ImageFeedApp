@@ -1,5 +1,7 @@
 # ImageFeed
 
+https://github.com/user-attachments/assets/4c56afd9-0d99-4036-9fd8-8a817d594b3b
+
 # Links
 
 - [Figma Design](https://clck.ru/38ddGT)
