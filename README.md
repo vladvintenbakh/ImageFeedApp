@@ -46,9 +46,9 @@ The user must authorize with OAuth to be able to use the app.
 
 1. The user sees the launch screen when they open the app.
 2. A screen that allows the user to authorize is shown when the app loads.
-    1. When the user clicks the "Sign in" button, Unsplash authorization page opens in the browser.
-        1. When the user clicks the "Login" button, the browser screen is dismissed. A loading screen is displayed in the app.
-        2. If the Unsplash OAuth authorization is not configured, nothing happens upon clicking the login button.
+    1. When the user presses the "Sign in" button, Unsplash authorization page opens in the browser.
+        1. When the user presses the "Login" button, the browser screen is dismissed. A loading screen is displayed in the app.
+        2. If the Unsplash OAuth authorization is not configured, nothing happens upon pressing the login button.
         3. If the Unsplash OAuth authorization is configured incorrectly, the user will not be able to access the main app functionality.
         4. If the login attempt is failed, an error alert is displayed;
             1. If the user presses "OK", they are redirected back to the authorization screen.
@@ -78,7 +78,7 @@ The image feed functionality allows the user to scroll through the images in the
 5. The user can unlike an image by pressing the like button (red heart) again. A loading indicator is displayed after pressing it.
     1. If the request succeeds, the loading indicator is hidden, and the icon color changes to gray.
     2. If the request fails, an error alert is shown. The user can press the button in the alert to try again.
-6. If the user clicks the image card, the image that it contains will expand, and the user will transition to the individual image screen (see the "Viewing an image in full screen" section).
+6. If the user taps the image card, the image that it contains will expand, and the user will transition to the individual image screen (see the "Viewing an image in full screen" section).
 7. If the user presses the profile icon, they can go to the profile screen.
 8. The user can switch between the image feed and profile screen using the tab bar.
 
@@ -122,6 +122,6 @@ The user can switch to their profile tab to view their profile details or sign o
 1. The profile details are loaded from the Unsplash profile. They cannot be edited in the app.
     1. If the profile data could not be loaded, a placeholder is displayed instead of the profile picture while the name and username are not shown.
 2. The user can sign out of their account by pressing the logout button. Upon pressing the button, a system alert asking for the user's confirmation is shown.
-    1. If the user clicks "Yes", they are logged out and redirected back to the authorization screen.
-    2. If the user clicks "No", they return to the profile screen.
+    1. If the user presses "Yes", they are logged out and redirected back to the authorization screen.
+    2. If the user presses "No", they return to the profile screen.
 3. The user can switch between the image feed and profile screens using the tab bar.
